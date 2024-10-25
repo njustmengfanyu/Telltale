@@ -92,6 +92,8 @@ def main():
     trajectory_loss_clean_re = np.load(file="./data_loss_trace/trajectory_loss_clean_re.npy")
     trajectory_loss_poison_re = np.load(file="./data_loss_trace/trajectory_loss_poison_re.npy")
     print("The truncated loss trajectory data has been successfully loaded.")
+    if not os.path.exists("./figure"):
+        os.mkdir("./figure")
     poison_trace, clean_trace, all_trace = dim_transp(trajectory_loss_poison_re, trajectory_loss_clean_re, trajectory_loss_re)
     curve_plot(clean_trace, poison_trace)
     trajectory_loss_re = torch.from_numpy(np.asmatrix(trajectory_loss_re)).float()
