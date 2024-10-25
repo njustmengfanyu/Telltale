@@ -51,7 +51,7 @@ def train_autoencoder(trajectory_loss_re):
             print(' Eval loss: %.4f' % loss_e.cpu().data.numpy())
             if loss_e < best_loss:
                 best_loss = loss_e
-                torch.save(net.state_dict(), './LSTM classifiers/Autoencoder.pth')
+                torch.save(net.state_dict(), '../LSTM classifiers/Autoencoder.pth')
                 print(" Saving!!")
     else:
         print("  An already existing weights file for autoencoder is being loaded.")
