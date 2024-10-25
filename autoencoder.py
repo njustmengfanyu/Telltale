@@ -54,6 +54,6 @@ def train_autoencoder(trajectory_loss_re):
                 torch.save(net.state_dict(), '../LSTM classifiers/Autoencoder.pth')
                 print(" Saving!!")
     else:
-        print("  An already existing weights file for autoencoder is being loaded.")
+        print("  An already existing weight for autoencoder will be loaded.")
 
     return s, d, net
