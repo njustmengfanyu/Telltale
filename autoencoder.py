@@ -34,7 +34,7 @@ def train_autoencoder(trajectory_loss_re):
     optimizer = torch.optim.Adam(net.parameters(), lr=0.0005)
     loss_F = torch.nn.MSELoss()
     best_loss = 1000
-    if not os.path.exists("./LSTM classifiers/Autoencoder.pth"):
+    if not os.path.exists("../LSTM classifiers/Autoencoder.pth"):
         for epoch in range(10):
             #Training
             net.train()
