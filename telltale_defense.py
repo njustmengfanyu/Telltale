@@ -4,7 +4,7 @@ import torch
 from sklearn.cluster import DBSCAN
 from sklearn.manifold import TSNE
 from autoencoder import train_autoencoder
-
+import os
 def norm(dataset):
     mean = np.mean(dataset, axis=0)
     std = np.std(dataset, axis=0)
