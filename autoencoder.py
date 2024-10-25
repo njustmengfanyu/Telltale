@@ -35,6 +35,7 @@ def train_autoencoder(trajectory_loss_re):
     loss_F = torch.nn.MSELoss()
     best_loss = 1000
     if not os.path.exists("./LSTM classifiers/Autoencoder.pth"):
+        print("Training LSTM Based Autoencoder:")
         for epoch in range(10):
             #Training
             net.train()
@@ -43,16 +44,16 @@ def train_autoencoder(trajectory_loss_re):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            print('Epoch: ', epoch, '| train loss: %.4f' % loss.cpu().data.numpy())
+            print(' Epoch: ', epoch, '| train loss: %.4f' % loss.cpu().data.numpy())
             #Testing
             net.eval()
             _, pred1 = net(X_test.view(-1, 1, s))
             loss_e = loss_F(pred1, X_test.view(-1, s))
-            print(' Eval loss: %.4f' % loss_e.cpu().data.numpy())
+            print('  Eval loss: %.4f' % loss_e.cpu().data.numpy())
             if loss_e < best_loss:
                 best_loss = loss_e
                 torch.save(net.state_dict(), './LSTM classifiers/Autoencoder.pth')
-                print(" Saving!!")
+                print("  Saving!!")
     else:
         print("  An already existing weight for autoencoder will be loaded.")
 
