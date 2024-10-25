@@ -1,5 +1,5 @@
 # About
-### This is the implementation of paper "Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!"(Telltale). 
+### This is the implementation of the NDSS 2025 paper "Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!"(Telltale). 
 Step 1: Installing the dependencies needed to run this repository.
 ```
 pip install -r requirements.txt
