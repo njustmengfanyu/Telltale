@@ -1,3 +1,8 @@
+'''
+This is a python implementation of 'Telltale'. In order to quickly reproduce our code, we provide a truncated loss trajectory without the need to train the classification model from scratch using the GPU. 
+However, we give the specific experimental setup as follows: we use a combination of CIFAR10+ResNet18 with a partial backdoor, where the poison rate is 1% and the trigger is a white square of size 8 x 8 in 
+the bottom right corner of the image.
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
