@@ -10,4 +10,11 @@ telltale_defense.py
 ```
 If you find our code useful, please kindly cite our work.
 ```
+@inproceedings{gao2025try,
+  title={Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!},
+  author={Gao, Yansong and Peng, Huaibing and Ma, Hua and Zhang, Zhi and Wang, Shuo and Holland, Rayne and Fu, Anmin and Xue, Minhui and Abbott, Derek},
+  booktitle={2025 Network and Distributed System Security (NDSS) Symposium},
+  year={2025},
+  organization={ISOC}
+}
 ```
