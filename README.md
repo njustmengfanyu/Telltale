@@ -5,7 +5,7 @@ Step 1: Installing the dependencies needed to run this repository.
 pip install -r requirements.txt
 ```
 
-Step 2: Runing the defense file.
+Step 2: Runing the defense file. The example shows a complete implementation using partial backdoor under the combination of CIFAR10+ResNet18 with the trigger being BadNet (white square of size 8 x 8 in the bottom right corner of the image). The time to train the model from scratch and collect truncation losses is often of unacceptable length, so we provide truncation loss traces that can be loaded directly.
 ```
 python telltale_defense.py
 ```
