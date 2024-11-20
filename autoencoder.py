@@ -1,7 +1,13 @@
 import torch
 import numpy as np
 import os
+
+
 class RNN(torch.nn.Module):
+    '''
+    This is the function that defines the structure of the LSTM neural network.
+    The return value is the result after LSTM encoder and decoder.
+    '''
     def __init__(self, s, d):
         super().__init__()
         self.s = s
@@ -24,7 +30,11 @@ class RNN(torch.nn.Module):
         decoder = self.out_2(output_in_last_timestep1)
         return encoder, decoder
 
+
 def train_autoencoder(trajectory_loss_re):
+    '''
+    Function to train LSTM autoencoder, return value 's' is the original data dimension, 'd' is the dimension of the data after dimensionality reduction, 'net' is the trained classifier.
+    '''
     trajectory_loss_re = torch.from_numpy(np.asmatrix(trajectory_loss_re)).float()
     X_train = trajectory_loss_re[:6000]
     X_test = trajectory_loss_re[6000:8000]
