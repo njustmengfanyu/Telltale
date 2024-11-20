@@ -9,7 +9,8 @@ Step 2: Runing the defense file. The example shows a complete implementation usi
 ```
 python telltale_defense.py
 ```
-Additional Notes:
+Additional Notes:xxx
+
 If you find our code useful, please kindly cite our work.
 ```
 @inproceedings{gao2025try,
