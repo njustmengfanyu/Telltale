@@ -6,7 +6,7 @@ pip install -r requirements.txt
 ```
 Step 2: Runing the defense file.
 ```
-telltale_defense.py
+python telltale_defense.py
 ```
 If you find our code useful, please kindly cite our work.
 ```
