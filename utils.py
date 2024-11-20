@@ -7,12 +7,11 @@ import math
 import os
 import sys
 import time
-
 import torch
 import torch.nn as nn
 import torch.nn.init as init
-
 import platform
+
 
 def get_mean_and_std(dataset):
     """Compute the mean and std value of dataset."""
