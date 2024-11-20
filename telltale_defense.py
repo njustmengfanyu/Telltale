@@ -1,7 +1,7 @@
 '''
 This is a python implementation of 'Telltale'. In order to quickly reproduce our code, we provide a truncated loss trajectory without the need to train the classification model from scratch using the GPU. 
-However, we give the specific experimental setup as follows: we use a combination of CIFAR10+ResNet18 with a partial backdoor, where the poison rate is 1% and the trigger is a white square of size 8 x 8 in 
-the bottom right corner of the image.
+However, we give the specific experimental setup as follows: we use a combination of CIFAR10+ResNet18 with a partial backdoor, where the poison rate is 1% and the trigger is BadNet (a white square of size 8 x 8 in 
+the bottom right corner of the image).
 '''
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,13 +10,22 @@ from sklearn.cluster import DBSCAN
 from sklearn.manifold import TSNE
 from autoencoder import train_autoencoder
 import os
+
+
 def norm(dataset):
+    '''
+    Implement a function to normalize the data.
+    '''
     mean = np.mean(dataset, axis=0)
     std = np.std(dataset, axis=0)
     normalize = (dataset - mean) / std
     return normalize
 
+
 def dim_transp(trajectory_loss_poison_re, trajectory_loss_clean_re, trajectory_loss_re):
+    '''
+    Implement functions to transform data dimensions.
+    '''
     poison_trace = []
     clean_trace = []
     all_trace = []
@@ -40,7 +49,11 @@ def dim_transp(trajectory_loss_poison_re, trajectory_loss_clean_re, trajectory_l
     print(np.asmatrix(all_trace).shape)
     return poison_trace, clean_trace, all_trace
 
+
 def display(loss_trace):
+    '''
+    Visualisation of truncated loss trajectory curves.
+    '''
     label_name = ["benign_loss", "poison_loss"]
     plt.figure(figsize=(10, 7), dpi=300)
     for k in range(2):
@@ -51,7 +64,11 @@ def display(loss_trace):
         plt.plot(np.arange(len(avg)), avg, label=label_name[k])
         plt.fill_between(np.arange(len(avg)), r1, r2, alpha=0.2)
 
+
 def curve_plot(clean_trace, poison_trace):
+    '''
+    Plot and save the curve image.
+    '''
     loss_trace = [clean_trace, poison_trace]
     display(loss_trace)
     plt.xlabel('Epoch', fontsize=18)
@@ -60,7 +77,11 @@ def curve_plot(clean_trace, poison_trace):
     plt.savefig('./figure/loss_curve.png')
     print("  The loss curve has been saved at './figure/loss_curve.png'.")
 
+
 def dim_reduction(s, d, net, trajectory_loss_re, trajectory_loss_clean_re):
+    '''
+    Dimensionality reduction of dataset using LSTM encoder.
+    '''
     net.load_state_dict(torch.load('./LSTM classifiers/Autoencoder.pth'))
     net.eval()
     pred_clean, _ = net(trajectory_loss_re[:len(trajectory_loss_clean_re)].view(-1, 1, s))
@@ -69,7 +90,11 @@ def dim_reduction(s, d, net, trajectory_loss_re, trajectory_loss_clean_re):
     pred_poison = np.array(pred_poison.squeeze(1).detach().numpy())
     return pred_clean, pred_poison
 
+
 def t_sne(pred_clean_fft, pred_poison_fft, pred_fft):
+    '''
+    Visualisation of data using T-SNE.
+    '''
     print("  t-SNE visualization...")
     labels = np.concatenate(
         [np.ones(pred_clean_fft.shape[0], dtype=int), np.zeros(pred_poison_fft.shape[0], dtype=int)])
@@ -84,13 +109,18 @@ def t_sne(pred_clean_fft, pred_poison_fft, pred_fft):
     print("  The t-SNE visualization has been saved at './figure/t_sne.png'.")
     return all_samples_tsne
 
+
 def clustering_dbscan(all_samples):
+    '''
+    Cluster analysis of processed data using DBSCAN.
+    '''
     print("  Clustering using DBSCAN...")
     cluster_data = all_samples
     eps, min_samples = 5, 5
     thecluster = DBSCAN(eps=eps, min_samples=min_samples).fit(cluster_data)
     labels = thecluster.labels_
     return labels
+
 
 def main():
     trajectory_loss_re = np.load(file="./data_loss_trace/trajectory_loss_re.npy")
@@ -109,19 +139,20 @@ def main():
     pred_fft = np.concatenate([pred_clean_fft, pred_poison_fft])
     all_samples = t_sne(pred_clean_fft, pred_poison_fft, pred_fft)
     labels = clustering_dbscan(all_samples)
-    c1, c2 = 0, 0
+    FP, TP = 0, 0
     for i in range(len(pred_poison)):
         if labels[len(pred_clean) + i] == 0:
-            c1 += 1
+            FP += 1
     for i in range(len(pred_clean)):
         if labels[i] == 0:
-            c2 += 1
+            TP += 1
 
     print("\n***** Detection Accuracy & FPR *****")
-    print("Det.Acc: {:.3f}% {}/{}".format((len(pred_poison) - c1) / len(pred_poison) * 100, len(pred_poison) - c1,
+    print("Det.Acc: {:.3f}% {}/{}".format((len(pred_poison) - FP) / len(pred_poison) * 100, len(pred_poison) - FP,
                                       len(pred_poison)))
-    print("FPR: {:.3f}% {}/{}".format((len(pred_clean) - c2) / len(pred_clean) * 100, len(pred_clean) - c2,
+    print("FPR: {:.3f}% {}/{}".format((len(pred_clean) - TP) / len(pred_clean) * 100, len(pred_clean) - TP,
                                       len(pred_clean)))
+
 
 if __name__ == "__main__":
     main()
