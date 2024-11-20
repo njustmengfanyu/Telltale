@@ -21,7 +21,7 @@ Additional Notes:
 
 (5) 'telltale.py' is the complete flow of our method.
 
-If you find our code useful, please kindly cite our work.
+### If you find our code useful, please kindly cite our work.
 ```
 @inproceedings{gao2025try,
   title={Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!},
