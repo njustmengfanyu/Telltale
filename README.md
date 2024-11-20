@@ -10,6 +10,7 @@ Step 2: Runing the defense file. The example shows a complete implementation usi
 python telltale_defense.py
 ```
 Additional Notes: 
+
 (1) The LSTM classifiers folder stores the LSTM based autoencoder. 
 
 (2) The classifier_models folder is the standard model construction code. 
