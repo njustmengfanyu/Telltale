@@ -78,7 +78,7 @@ def curve_plot(clean_trace, poison_trace):
     print("  The loss curve has been saved at './figure/loss_curve.png'.")
 
 
-def dim_reduction(s, d, net, trajectory_loss_re, trajectory_loss_clean_re):
+def dim_reduction(s, net, trajectory_loss_re, trajectory_loss_clean_re):
     '''
     Dimensionality reduction of dataset using LSTM encoder.
     '''
@@ -133,7 +133,7 @@ def main():
     curve_plot(clean_trace, poison_trace)
     trajectory_loss_re = torch.from_numpy(np.asmatrix(trajectory_loss_re)).float()
     s, d, net = train_autoencoder(trajectory_loss_re)
-    pred_clean, pred_poison = dim_reduction(s, d, net, trajectory_loss_re, trajectory_loss_clean_re)
+    pred_clean, pred_poison = dim_reduction(s, net, trajectory_loss_re, trajectory_loss_clean_re)
     pred_clean, pred_poison = norm(np.array(pred_clean)), norm(np.array(pred_poison))
     pred_clean_fft, pred_poison_fft = np.abs(np.fft.fft(pred_clean)), np.abs(np.fft.fft(pred_poison))
     pred_fft = np.concatenate([pred_clean_fft, pred_poison_fft])
