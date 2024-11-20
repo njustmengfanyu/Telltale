@@ -9,7 +9,16 @@ Step 2: Runing the defense file. The example shows a complete implementation usi
 ```
 python telltale_defense.py
 ```
-Additional Notes: (1) The LSTM classifiers folder stores the LSTM based autoencoder. (2) The classifier_models folder is the standard model construction code. (3) The data_loss_trace folder stores the truncated loss trace data. (4) autoencoder.py is the code for training the LSTM autoencoder. (5)telltale.py is the complete flow of our method “Telltale”.
+Additional Notes: 
+(1) The LSTM classifiers folder stores the LSTM based autoencoder. 
+
+(2) The classifier_models folder is the standard model construction code. 
+
+(3) The data_loss_trace folder stores the truncated loss trace data. 
+
+(4) autoencoder.py is the code for training the LSTM autoencoder. 
+
+(5)telltale.py is the complete flow of our method “Telltale”.
 
 If you find our code useful, please kindly cite our work.
 ```
