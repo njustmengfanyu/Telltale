@@ -38,8 +38,6 @@ def show_images(images, normalize=None, ipython=True,
                 margin_height=2, margin_color='red',
                 figsize=(18,16), save_npy=None):
     """ Shows pytorch tensors/variables as images """
-
-
     # first format the first arg to be hz-stacked numpy arrays
     if not isinstance(images, list):
         images = [images]
@@ -78,10 +76,7 @@ def show_images(images, normalize=None, ipython=True,
     if save_npy is not None:
         scipy_img = scipy.misc.toimage(cat_rows)
         scipy_img.save(save_npy)
-
     plt.show()
-
-
 
 
 def display_adversarial_2row(classifier_net, normalizer, original_images,
@@ -113,13 +108,11 @@ def display_adversarial_2row(classifier_net, normalizer, original_images,
         None, but displays images
     """
     assert which in ['incorrect', 'random', 'correct']
-
-
     # If not 'random' selection, prune to only the valid things
     to_sample_idxs = []
     if which != 'random':
         classifier_net.eval() # can never be too safe =)
-
+        
         # classify the originals with top1
         original_norm_var = normalizer.forward(original_images)
         original_out_logits = classifier_net.forward(original_norm_var)
@@ -129,7 +122,6 @@ def display_adversarial_2row(classifier_net, normalizer, original_images,
         adv_norm_var = normalizer.forward(adversarial_images)
         adv_out_logits = classifier_net.forward(adv_norm_var)
         _, adv_out_classes = adv_out_logits.max(1)
-
 
         # collect indices of matching
         selector = lambda var: (which == 'correct') == bool(float(var))
@@ -167,6 +159,7 @@ def display_adversarial_2row(classifier_net, normalizer, original_images,
 def display_adversarial_notebook():
     pass
 
+
 def nchw_l2(x, y, squared=True):
     """ Computes l2 norm between two NxCxHxW images
     ARGS:
@@ -178,12 +171,8 @@ def nchw_l2(x, y, squared=True):
         shape is (Nx1x1x1)
     """
     temp = torch.pow(x - y, 2) # square diff
-
-
     for i in range(1, temp.dim()): # reduce on all but first dimension
         temp = torch.sum(temp, i, keepdim=True)
-
     if not squared:
         temp = torch.pow(temp, 0.5)
-
     return temp.squeeze()
