@@ -14,7 +14,7 @@ import os
 
 def norm(dataset):
     '''
-    Implement a function to normalize the data.
+    Implement a function to normalize the data. The "dataset" is the original data and the return value "normalize" is a normalized dataset.
     '''
     mean = np.mean(dataset, axis=0)
     std = np.std(dataset, axis=0)
@@ -25,6 +25,7 @@ def norm(dataset):
 def dim_transp(trajectory_loss_poison_re, trajectory_loss_clean_re, trajectory_loss_re):
     '''
     Implement functions to transform data dimensions.
+    The return values poison_trace, clean_trace, and all_trace are dimensionally transformed poisoned sample traces, clean sample traces, and mixed poisoned and benign traces, respectively.
     '''
     poison_trace = []
     clean_trace = []
@@ -81,6 +82,7 @@ def curve_plot(clean_trace, poison_trace):
 def dim_reduction(s, net, trajectory_loss_re, trajectory_loss_clean_re):
     '''
     Dimensionality reduction of dataset using LSTM encoder.
+    The return value is the data after dimensionality reduction.
     '''
     net.load_state_dict(torch.load('./LSTM classifiers/Autoencoder.pth'))
     net.eval()
@@ -94,6 +96,7 @@ def dim_reduction(s, net, trajectory_loss_re, trajectory_loss_clean_re):
 def t_sne(pred_clean_fft, pred_poison_fft, pred_fft):
     '''
     Visualisation of data using T-SNE.
+    The return value is the visualisation data used after TSNE processing.
     '''
     print("  t-SNE visualization...")
     labels = np.concatenate(
@@ -113,6 +116,7 @@ def t_sne(pred_clean_fft, pred_poison_fft, pred_fft):
 def clustering_dbscan(all_samples):
     '''
     Cluster analysis of processed data using DBSCAN.
+    The return value is the label after DBSCAN clustering.
     '''
     print("  Clustering using DBSCAN...")
     cluster_data = all_samples
