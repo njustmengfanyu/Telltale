@@ -21,6 +21,8 @@ Additional Notes:
 
 (5) 'telltale.py' is the complete flow of our method.
 
+(6) The 'config.py' file implements the specific hyperparameter configuration for us to train the classifier from scratch and extract the loss trajectories (CIFAR10+ResNet18), which follows the standard DaaS scenario training process as mentioned in the paper.
+
 ### If you find our code useful, please kindly cite our work.
 ```
 @inproceedings{gao2025try,
