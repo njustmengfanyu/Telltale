@@ -155,10 +155,9 @@ class NetC_MNIST(nn.Module):
         for module in self.children():
             x = module(x)
         return x
-
-
 # We acknowledge the following repo from where we adopt the VGG-Face model
 # https://github.com/prlz77/vgg-face.pytorch
+
 
 class VGG_16(nn.Module):
     """
