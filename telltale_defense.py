@@ -150,7 +150,6 @@ def main():
     for i in range(len(pred_clean)):
         if labels[i] == 0:
             TP += 1
-
     print("\n***** Detection Accuracy & FPR *****")
     print("Det.Acc: {:.3f}% {}/{}".format((len(pred_poison) - FP) / len(pred_poison) * 100, len(pred_poison) - FP,
                                       len(pred_poison)))
