@@ -1,6 +1,6 @@
 # Telltale
-### This is the implementation of the NDSS 2025 paper "Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!"(Telltale). All steps run on the CPU, GPU devices are not required. [Instructions](https://drive.google.com/file/d/1xbaiwDy6itqLJQSEfa49DrohtmH9FJRu/view)
-Step 1: Installing the dependencies needed to run this repository.
+### This is the implementation of the NDSS 2025 paper "Try to Poison My Deep Learning Data? Nowhere to Hide Your Trajectory Spectrum!"(Telltale). [Instructions](https://drive.google.com/file/d/1xbaiwDy6itqLJQSEfa49DrohtmH9FJRu/view)
+Step 1: Installing the dependencies needed to run this repository.(All steps run on the CPU, GPU devices are not required.)
 ```
 pip install -r requirements.txt
 ```
