@@ -151,6 +151,10 @@ def main():
         if labels[i] == 0:
             TP += 1
     print("\n***** Detection Accuracy & FPR *****")
+    '''
+    The results may vary due to hardware and software variations and the presence of unavoidable errors. In general, for Detection Accuracy is not less than 94% while FPR is not higher than 5%. 
+    The robustness of the detection framework can be demonstrated.
+    '''
     print("Det.Acc: {:.3f}% {}/{}".format((len(pred_poison) - FP) / len(pred_poison) * 100, len(pred_poison) - FP,
                                       len(pred_poison)))
     print("FPR: {:.3f}% {}/{}".format((len(pred_clean) - TP) / len(pred_clean) * 100, len(pred_clean) - TP,
