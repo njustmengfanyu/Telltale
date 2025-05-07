@@ -36,7 +36,7 @@ def train_autoencoder(trajectory_loss_re):
     Function to train LSTM autoencoder, return value 's' is the original data dimension, 'd' is the dimension of the data after dimensionality reduction, 'net' is the trained classifier.
     '''
     trajectory_loss_re = torch.from_numpy(np.asmatrix(trajectory_loss_re)).float()
-    X_train = trajectory_loss_re[:6000]
+    X_train = trajectory_loss_re[:6000] #Random selection is fine.
     X_test = trajectory_loss_re[6000:8000]
     s = X_train.shape[1]
     d = int(s * 2 / 3)
