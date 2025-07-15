@@ -130,6 +130,11 @@ def main():
     trajectory_loss_re = np.load(file="./data_loss_trace/trajectory_loss_re.npy")
     trajectory_loss_clean_re = np.load(file="./data_loss_trace/trajectory_loss_clean_re.npy")
     trajectory_loss_poison_re = np.load(file="./data_loss_trace/trajectory_loss_poison_re.npy")
+    print("Trajectory loss dimensions:")
+    print(f"trajectory_loss_re shape: {trajectory_loss_re.shape}")
+    print(f"trajectory_loss_clean_re shape: {trajectory_loss_clean_re.shape}")
+    print(f"trajectory_loss_poison_re shape: {trajectory_loss_poison_re.shape}")
+
     print("The truncated loss trajectory data has been successfully loaded.")
     if not os.path.exists("./figure"):
         os.mkdir("./figure")
